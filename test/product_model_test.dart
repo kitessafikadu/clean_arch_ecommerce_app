@@ -1,5 +1,5 @@
+import 'package:clean_arch_ecommerce_app/data/models/product_models.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ecommerce_app/features/product/data/models/product_model.dart';
 
 void main() {
   group('ProductModel', () {
