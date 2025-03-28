@@ -55,7 +55,7 @@ To get started with this project locally, follow these steps:
 
 ```bash
 git clone https://github.com/kitessafikadu/clean_arch_ecommerce_app.git
-cd ecommerce_clean_arch
+cd clean_arch_ecommerce_app
 ```
 
 ### Run the Application
