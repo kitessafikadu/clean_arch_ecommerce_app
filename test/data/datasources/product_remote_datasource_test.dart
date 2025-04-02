@@ -19,7 +19,7 @@ void main() {
   });
 
   const String baseUrl =
-      'https://documenter.getpostman.com/view/24515281/2sA3XPBgv5';
+      'https://g5-flutter-learning-path-be.onrender.com/api/v1/';
 
   final testProductModel = ProductModel(
     id: '1',

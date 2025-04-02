@@ -13,7 +13,7 @@ abstract class ProductRemoteDataSource {
 class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   final http.Client client;
   static const String baseUrl =
-      'https://documenter.getpostman.com/view/24515281/2sA3XPBgv5';
+      'https://g5-flutter-learning-path-be.onrender.com/api/v1/';
 
   ProductRemoteDataSourceImpl({required this.client});
 
