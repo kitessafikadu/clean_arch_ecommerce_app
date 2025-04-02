@@ -1,6 +1,6 @@
-import 'package:clean_arch_ecommerce_app/bloc/product_bloc.dart';
-import 'package:clean_arch_ecommerce_app/bloc/product_state.dart';
-import 'package:clean_arch_ecommerce_app/bloc/product_event.dart';
+import 'package:clean_arch_ecommerce_app/presentation/bloc/product_bloc.dart';
+import 'package:clean_arch_ecommerce_app/presentation/bloc/product_state.dart';
+import 'package:clean_arch_ecommerce_app/presentation/bloc/product_event.dart';
 import 'package:clean_arch_ecommerce_app/data/models/product_models.dart';
 import 'package:clean_arch_ecommerce_app/domain/repositories/product_repository.dart';
 import 'package:flutter_test/flutter_test.dart';

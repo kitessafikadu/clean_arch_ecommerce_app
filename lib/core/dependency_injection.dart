@@ -1,4 +1,4 @@
-import 'package:clean_arch_ecommerce_app/bloc/product_bloc.dart';
+import 'package:clean_arch_ecommerce_app/presentation/bloc/product_bloc.dart';
 import 'package:clean_arch_ecommerce_app/core/network_info.dart';
 import 'package:clean_arch_ecommerce_app/data/datasources/product_local_datasource.dart';
 import 'package:clean_arch_ecommerce_app/data/datasources/product_remote_datasource.dart';
