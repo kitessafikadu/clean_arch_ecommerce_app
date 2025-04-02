@@ -10,7 +10,8 @@ import 'package:clean_arch_ecommerce_app/data/datasources/product_local_datasour
     as _i5;
 import 'package:clean_arch_ecommerce_app/data/datasources/product_remote_datasource.dart'
     as _i3;
-import 'package:clean_arch_ecommerce_app/domain/entities/product.dart' as _i2;
+import 'package:clean_arch_ecommerce_app/data/models/product_models.dart'
+    as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -26,8 +27,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeProduct_0 extends _i1.SmartFake implements _i2.Product {
-  _FakeProduct_0(
+class _FakeProductModel_0 extends _i1.SmartFake implements _i2.ProductModel {
+  _FakeProductModel_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -46,7 +47,8 @@ class MockProductRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<void> insertProduct(_i2.Product? product) => (super.noSuchMethod(
+  _i4.Future<void> insertProduct(_i2.ProductModel? product) =>
+      (super.noSuchMethod(
         Invocation.method(
           #insertProduct,
           [product],
@@ -56,7 +58,8 @@ class MockProductRemoteDataSource extends _i1.Mock
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<void> updateProduct(_i2.Product? product) => (super.noSuchMethod(
+  _i4.Future<void> updateProduct(_i2.ProductModel? product) =>
+      (super.noSuchMethod(
         Invocation.method(
           #updateProduct,
           [product],
@@ -76,28 +79,29 @@ class MockProductRemoteDataSource extends _i1.Mock
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<_i2.Product> getProduct(String? id) => (super.noSuchMethod(
+  _i4.Future<_i2.ProductModel> getProduct(String? id) => (super.noSuchMethod(
         Invocation.method(
           #getProduct,
           [id],
         ),
-        returnValue: _i4.Future<_i2.Product>.value(_FakeProduct_0(
+        returnValue: _i4.Future<_i2.ProductModel>.value(_FakeProductModel_0(
           this,
           Invocation.method(
             #getProduct,
             [id],
           ),
         )),
-      ) as _i4.Future<_i2.Product>);
+      ) as _i4.Future<_i2.ProductModel>);
 
   @override
-  _i4.Future<List<_i2.Product>> getAllProducts() => (super.noSuchMethod(
+  _i4.Future<List<_i2.ProductModel>> getAllProducts() => (super.noSuchMethod(
         Invocation.method(
           #getAllProducts,
           [],
         ),
-        returnValue: _i4.Future<List<_i2.Product>>.value(<_i2.Product>[]),
-      ) as _i4.Future<List<_i2.Product>>);
+        returnValue:
+            _i4.Future<List<_i2.ProductModel>>.value(<_i2.ProductModel>[]),
+      ) as _i4.Future<List<_i2.ProductModel>>);
 }
 
 /// A class which mocks [ProductLocalDataSource].
@@ -110,58 +114,25 @@ class MockProductLocalDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<void> insertProduct(_i2.Product? product) => (super.noSuchMethod(
+  _i4.Future<void> cacheProducts(List<_i2.ProductModel>? products) =>
+      (super.noSuchMethod(
         Invocation.method(
-          #insertProduct,
-          [product],
+          #cacheProducts,
+          [products],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<void> updateProduct(_i2.Product? product) => (super.noSuchMethod(
+  _i4.Future<List<_i2.ProductModel>> getCachedProducts() => (super.noSuchMethod(
         Invocation.method(
-          #updateProduct,
-          [product],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-
-  @override
-  _i4.Future<void> deleteProduct(String? id) => (super.noSuchMethod(
-        Invocation.method(
-          #deleteProduct,
-          [id],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-
-  @override
-  _i4.Future<_i2.Product> getProduct(String? id) => (super.noSuchMethod(
-        Invocation.method(
-          #getProduct,
-          [id],
-        ),
-        returnValue: _i4.Future<_i2.Product>.value(_FakeProduct_0(
-          this,
-          Invocation.method(
-            #getProduct,
-            [id],
-          ),
-        )),
-      ) as _i4.Future<_i2.Product>);
-
-  @override
-  _i4.Future<List<_i2.Product>> getAllProducts() => (super.noSuchMethod(
-        Invocation.method(
-          #getAllProducts,
+          #getCachedProducts,
           [],
         ),
-        returnValue: _i4.Future<List<_i2.Product>>.value(<_i2.Product>[]),
-      ) as _i4.Future<List<_i2.Product>>);
+        returnValue:
+            _i4.Future<List<_i2.ProductModel>>.value(<_i2.ProductModel>[]),
+      ) as _i4.Future<List<_i2.ProductModel>>);
 }
 
 /// A class which mocks [NetworkInfo].
