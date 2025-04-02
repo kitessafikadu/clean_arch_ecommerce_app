@@ -1,5 +1,6 @@
 import 'package:clean_arch_ecommerce_app/bloc/product_event.dart';
 import 'package:clean_arch_ecommerce_app/bloc/product_state.dart';
+import 'package:clean_arch_ecommerce_app/data/models/product_models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clean_arch_ecommerce_app/domain/repositories/product_repository.dart';
 
@@ -20,7 +21,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     emit(LoadingState());
     try {
       final products = await productRepository.getAllProducts();
-      emit(LoadedAllProductsState(products));
+      emit(LoadedAllProductsState(products
+          .map((product) => ProductModel.fromProduct(product))
+          .toList()));
     } catch (e) {
       emit(ErrorState(e.toString()));
     }
