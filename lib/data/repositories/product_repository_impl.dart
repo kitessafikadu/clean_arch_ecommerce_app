@@ -1,9 +1,10 @@
-import '../../core/network_info.dart';
+import 'package:clean_arch_ecommerce_app/data/datasources/product_local_datasource.dart';
+import 'package:clean_arch_ecommerce_app/data/datasources/product_remote_datasource.dart';
+import 'package:clean_arch_ecommerce_app/data/models/product_models.dart';
+
 import '../../domain/repositories/product_repository.dart';
 import '../../domain/entities/product.dart';
-import '../datasources/product_remote_datasource.dart';
-import '../datasources/product_local_datasource.dart';
-import '../../core/failure.dart';
+import '../../core/network_info.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
   final ProductRemoteDataSource remoteDataSource;
@@ -18,46 +19,37 @@ class ProductRepositoryImpl implements ProductRepository {
 
   @override
   Future<void> insertProduct(Product product) async {
-    if (await networkInfo.isConnected) {
-      await remoteDataSource.insertProduct(product);
-    } else {
-      await localDataSource.insertProduct(product);
-    }
+    await remoteDataSource.insertProduct(product);
   }
 
   @override
   Future<void> updateProduct(Product product) async {
-    if (await networkInfo.isConnected) {
-      await remoteDataSource.updateProduct(product);
-    } else {
-      await localDataSource.updateProduct(product);
-    }
+    await remoteDataSource.updateProduct(product);
   }
 
   @override
   Future<void> deleteProduct(String id) async {
-    if (await networkInfo.isConnected) {
-      await remoteDataSource.deleteProduct(id);
-    } else {
-      await localDataSource.deleteProduct(id);
-    }
+    await remoteDataSource.deleteProduct(id);
   }
 
   @override
   Future<Product> getProduct(String id) async {
     if (await networkInfo.isConnected) {
-      return remoteDataSource.getProduct(id);
+      return await remoteDataSource.getProduct(id);
     } else {
-      return localDataSource.getProduct(id);
+      final cachedProducts = await localDataSource.getCachedProducts();
+      return cachedProducts.firstWhere((p) => p.id == id);
     }
   }
 
   @override
   Future<List<Product>> getAllProducts() async {
     if (await networkInfo.isConnected) {
-      return remoteDataSource.getAllProducts();
+      final products = await remoteDataSource.getAllProducts();
+      await localDataSource.cacheProducts(products as List<ProductModel>);
+      return products;
     } else {
-      return localDataSource.getAllProducts();
+      return await localDataSource.getCachedProducts();
     }
   }
 }

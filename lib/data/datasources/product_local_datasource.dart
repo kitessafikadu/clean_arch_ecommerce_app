@@ -1,41 +1,32 @@
-import '../../domain/entities/product.dart';
+import 'dart:convert';
+import 'package:clean_arch_ecommerce_app/data/models/product_models.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ProductLocalDataSource {
-  Future<void> insertProduct(Product product);
-  Future<void> updateProduct(Product product);
-  Future<void> deleteProduct(String id);
-  Future<Product> getProduct(String id);
-  Future<List<Product>> getAllProducts();
+  Future<void> cacheProducts(List<ProductModel> products);
+  Future<List<ProductModel>> getCachedProducts();
 }
 
 class ProductLocalDataSourceImpl implements ProductLocalDataSource {
-  final List<Product> _cachedProducts = [];
+  final SharedPreferences sharedPreferences;
+  static const cachedProductsKey = 'CACHED_PRODUCTS';
+
+  ProductLocalDataSourceImpl({required this.sharedPreferences});
 
   @override
-  Future<void> insertProduct(Product product) async {
-    _cachedProducts.add(product);
+  Future<void> cacheProducts(List<ProductModel> products) async {
+    final jsonString = json.encode(products.map((p) => p.toJson()).toList());
+    await sharedPreferences.setString(cachedProductsKey, jsonString);
   }
 
   @override
-  Future<void> updateProduct(Product product) async {
-    int index = _cachedProducts.indexWhere((p) => p.id == product.id);
-    if (index != -1) {
-      _cachedProducts[index] = product;
+  Future<List<ProductModel>> getCachedProducts() async {
+    final jsonString = sharedPreferences.getString(cachedProductsKey);
+    if (jsonString != null) {
+      final List<dynamic> jsonList = json.decode(jsonString);
+      return jsonList.map((json) => ProductModel.fromJson(json)).toList();
+    } else {
+      throw Exception('No Cached Products Found');
     }
-  }
-
-  @override
-  Future<void> deleteProduct(String id) async {
-    _cachedProducts.removeWhere((p) => p.id == id);
-  }
-
-  @override
-  Future<Product> getProduct(String id) async {
-    return _cachedProducts.firstWhere((p) => p.id == id);
-  }
-
-  @override
-  Future<List<Product>> getAllProducts() async {
-    return _cachedProducts;
   }
 }
